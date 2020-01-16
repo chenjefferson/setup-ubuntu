@@ -56,7 +56,7 @@ if [ ! $Y ]; then
 fi
 sudo add-apt-repository -y ppa:system76/pop
 sudo apt update -y -q
-sudo apt install -y -q pop-theme pop-wallpapers
+sudo apt install -y -q pop-theme pop-wallpapers qt5-style-plugins
 if [ $? -ne 0 ]; then
     echo "error: install POP THEME failed"
     echo -n "press <enter> to continue or ^C to exit:"
@@ -82,6 +82,12 @@ gsettings set org.gnome.desktop.screensaver picture-uri "file:///usr/share/backg
 gsettings set org.gnome.mutter dynamic-workspaces false
 gsettings set org.gnome.desktop.wm.preferences num-workspaces 7
 gsettings set org.gnome.Terminal.Legacy.Settings default-show-menubar false
+
+if [ ! $Y ]; then
+    echo -n "press <enter> to SET QT4 THEME:"
+    read
+fi
+sudo cat "QT_QPA_PLATFORMTHEME=gtk2" >> /etc/environment
 
 if [ ! $Y ]; then
     echo -n "press <enter> to SET GNOME OPTIONS:"
